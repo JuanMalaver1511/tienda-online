@@ -1,0 +1,151 @@
+@startuml ecommerce_database
+title Tienda Online - Arquitectura Multi-Base de Datos
+!define PRIMARY_COLOR #4CAF50
+!define FOREIGN_COLOR #2196F3
+!define TIMESTAMP_COLOR #FF9800
+
+' Estilos
+skinparam entity {
+    BackgroundColor #F5F5F5
+    BorderColor #333333
+    ArrowColor #666666
+}
+
+' ===== SQL RELACIONAL (MySQL) =====
+package "🗄️ SQL RELACIONAL - MySQL" #E8F5E9 {
+
+package "GESTIÓN DE USUARIOS" #C8E6C9 {
+
+entity "👤 Users" as users #E8F5E9 {
+    🟢 *id : INT <<PK>>
+    --
+    email : VARCHAR(100) <<UNIQUE>>
+    password : VARCHAR(255)
+    first_name : VARCHAR(100)
+    last_name : VARCHAR(100)
+    phone : VARCHAR(20)
+    🟠 created_at : TIMESTAMP
+    🟠 updated_at : TIMESTAMP
+}
+
+}
+
+package "GESTIÓN DE PRODUCTOS" #A5D6A7 {
+
+entity "📂 Categories" as categories #E8F5E9 {
+    🟢 *id : INT <<PK>>
+    --
+    name : VARCHAR(100)
+    description : TEXT
+    🟠 created_at : TIMESTAMP
+    🟠 updated_at : TIMESTAMP
+}
+
+entity "📦 Products" as products #E8F5E9 {
+    🟢 *id : INT <<PK>>
+    --
+    name : VARCHAR(255)
+    description : TEXT
+    price : DECIMAL(10,2)
+    stock : INT
+    🔵 category_id : INT <<FK>>
+    --
+    🟠 created_at : TIMESTAMP
+    🟠 updated_at : TIMESTAMP
+}
+
+}
+
+package "GESTIÓN DE PEDIDOS" #81C784 {
+
+entity "📋 Orders" as orders #E8F5E9 {
+    🟢 *id : INT <<PK>>
+    --
+    🔵 user_id : INT <<FK>>
+    order_date : TIMESTAMP
+    total : DECIMAL(10,2)
+    status : VARCHAR(50)
+    shipping_address : TEXT
+    🟠 created_at : TIMESTAMP
+    🟠 updated_at : TIMESTAMP
+}
+
+entity "📦 OrderItems" as order_items #E8F5E9 {
+    🟢 *id : INT <<PK>>
+    --
+    🔵 order_id : INT <<FK>>
+    🔵 product_id : INT <<FK>>
+    quantity : INT
+    unit_price : DECIMAL(10,2)
+}
+
+}
+
+users ||--o{ orders : "realiza"
+categories ||--o{ products : "contiene"
+products ||--o{ order_items : "incluye"
+orders ||--o{ order_items : "tiene"
+
+}
+
+' ===== NOSQL (MongoDB) =====
+package "📄 NoSQL - MongoDB" #FFF3E0 {
+
+entity "⭐ Reviews Collection" as reviews_mongo #FFECB3 {
+    🟢 _id : ObjectId <<PK>>
+    --
+    🔵 product_id : String
+    🔵 user_id : String
+    rating : Number (1-5)
+    comment : String
+    email : String
+    🟠 created_at : Date
+}
+
+note right of reviews_mongo
+    Datos desnormalizados
+    Sin FK explícitas
+    Fácil de escalar
+end note
+
+}
+
+' ===== CACHE (Redis) =====
+package "⚡ Cache - Redis" #F3E5F5 {
+
+entity "🛒 Cart Sessions" as cart_redis #E1BEE7 {
+    🟢 user_id : String <<PK>>
+    --
+    items : Array[Object]
+    🔵 product_id : String
+    quantity : Number
+    price : Decimal
+    🟠 expires_at : TTL
+}
+
+note right of cart_redis
+    Almacenamiento temporal
+    TTL (auto-elimina)
+    Alto rendimiento
+end note
+
+}
+
+' ===== RELACIONES ENTRE SISTEMAS =====
+users ..> reviews_mongo : escribe
+users ..> cart_redis : mantiene
+products ..> reviews_mongo : recibe
+products ..> cart_redis : está en
+orders ..> cart_redis : vacía
+
+
+note bottom
+    🟢 PK = Clave Primaria          |  SQL: Relacional normalizado
+    🔵 FK = Clave Foránea          |  NoSQL: Flexible, desnormalizado
+    🟠 TIMESTAMP = Fecha automática |  Cache: Temporal con expiración
+    
+    Línea sólida (—) = Relación dentro del mismo BD
+    Línea punteada (-.->)= Relación entre diferentes BD
+end note
+
+@enduml
