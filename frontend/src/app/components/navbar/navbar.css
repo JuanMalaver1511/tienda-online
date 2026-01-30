@@ -1,19 +1,10 @@
-.logo img {
-  max-height: 50px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;   /* Alinea TODO verticalmente */
+  align-items: center;  
   padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #2f41a3 0%, #1e2d7a 100%);
-  color: white;
-  box-shadow: 0 4px 20px rgba(47, 65, 163, 0.25);
+  background: rgb(240, 240, 240);
+  color: #1a1919;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -35,10 +26,7 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.logo:hover {
-  transform: translateY(-1px);
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+
 
 .menu {
   display: flex;
@@ -49,10 +37,10 @@
 }
 
 .menu a {
-  color: white;
+  color: rgb(24, 24, 24);
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
   transition: all 0.3s ease;
@@ -82,71 +70,37 @@
   width: 80%;
 }
 
-/* Botón logout */
 
 
-
-/* Contenedor general */
-.user-menu {
-  position: relative;
-}
-
-/* Botón usuario */
-.user-btn {
-  color: #ffff;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-}
-
-/* Estilos del menú */
-.dropdown {
-  position: absolute;
-  top: 45px;
-  right: 0;
-  background: white;
-  border-radius: 8px;
-  min-width: 150px;
-  padding: 10px 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-  display: none;
-  flex-direction: column;
-  z-index: 10;
-}
-
-/* Mostrar menú cuando la clase active está presente */
-.dropdown.active {
+.iconos {
   display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.dropdown a,
-.dropdown button {
-  padding: 10px 15px;
-  text-align: left;
-  background: transparent;
-  border: none;
-  width: 100%;
+/* Cada icono */
+.iconos li {
   cursor: pointer;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
-.dropdown a:hover,
-.dropdown button:hover {
-  background: #f0f0f0;
+/* Efecto hover */
+.iconos svg {
+  color:#2b2a2a;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.iconos li:hover svg {
+  transform: scale(1.1);
   color: #000;
 }
 
-.dropdown a{
-  color: #1a1919;
-}
-.dropdown svg {
-  width: 16px;
-  height: 16px;
-  vertical-align: middle;
-  margin-right: 8px;
-  
-}
+
+
 /* Responsive */
 @media (max-width: 768px) {
   .navbar {
