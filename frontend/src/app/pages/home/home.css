@@ -1,0 +1,11 @@
+.title{
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    text-align: center;
+    margin: 40px auto;
+    font-weight: 700;
+    font-size: 1.9rem;
+    color: #1b1b1b;
+    letter-spacing: 1px;
+    position: relative;
+}
+
