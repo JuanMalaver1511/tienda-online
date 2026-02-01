@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-portada',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './portada.html',
   styleUrls: ['./portada.css']
@@ -10,9 +11,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class Portada implements OnInit, OnDestroy {
 
   images: string[] = [
-    '/assets/images/5406823.jpg',
-    'assets/img/slide2.jpg',
-    'assets/img/slide3.jpg'
+    '2.jpg',
+    '1.jpg',
+    '1.jpg'
   ];
 
   currentIndex = 0;

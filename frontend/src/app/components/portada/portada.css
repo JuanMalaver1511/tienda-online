@@ -1,8 +1,9 @@
 .carousel {
   position: relative;
   width: 100%;
-  height: 80vh; /* altura grande */
+  height: 110vh; /* Volvemos a vh simple */
   overflow: hidden;
+  margin-top: 0; /* Sin margin negativo */
 }
 
 .carousel-track {
@@ -19,7 +20,8 @@
 .carousel-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ocupa todo el ancho sin deformarse */
+  object-fit: cover;
+  object-position: center center;
 }
 
 /* Botones */
@@ -27,13 +29,25 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.89);
   border: none;
   color: white;
-  font-size: 2rem;
-  padding: 10px 15px;
+  font-weight: bold;
+  font-size: 0.9rem;
   cursor: pointer;
   z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav:hover {
+  background: rgba(0, 0, 0, 1);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .prev {
@@ -52,16 +66,119 @@
   display: flex;
   justify-content: center;
   gap: 10px;
+  z-index: 10;
 }
 
 .indicators span {
   width: 12px;
   height: 12px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.indicators span:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
 }
 
 .indicators span.active {
   background: white;
+  transform: scale(1.3);
+}
+
+/* Responsive - Tablets */
+@media (max-width: 1024px) {
+  .carousel {
+    height: 70vh;
+  }
+  
+  .nav {
+    width: 35px;
+    height: 35px;
+    font-size: 0.8rem;
+  }
+  
+  .prev {
+    left: 15px;
+  }
+  
+  .next {
+    right: 15px;
+  }
+  
+  .indicators span {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .carousel {
+    height: 60vh;
+  }
+  
+  .carousel-slide img {
+    object-position: center center;
+  }
+  
+  .nav {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  .indicators {
+    bottom: 15px;
+    gap: 8px;
+  }
+  
+  .indicators span {
+    width: 8px;
+    height: 8px;
+    border-width: 1px;
+  }
+}
+
+/* Responsive - Mobile pequeño */
+@media (max-width: 480px) {
+  .carousel {
+    height: 50vh;
+  }
+  
+  .nav {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .prev {
+    left: 8px;
+  }
+  
+  .next {
+    right: 8px;
+  }
+  
+  .indicators {
+    bottom: 10px;
+    gap: 6px;
+  }
+  
+  .indicators span {
+    width: 7px;
+    height: 7px;
+  }
 }
