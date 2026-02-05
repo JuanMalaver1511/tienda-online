@@ -1,11 +1,11 @@
-
-<aside class="sidebar">
-    <h3>Categorías</h3>
-    <ul>
-        <li><a href="#">Categoría 1</a></li>
-        <li><a href="#">Categoría 2</a></li>
-        <li><a href="#">Categoría 3</a></li>
-        <li><a href="#">Categoría 4</a></li>
-    </ul>
-</aside>
-
+<div class="filter-container">
+  <nav class="filter-tabs">
+    <a 
+      *ngFor="let categoria of categorias" 
+      (click)="seleccionarCategoria(categoria.valor)"
+      [class.active]="estaActiva(categoria.valor)"
+      class="filter-tab">
+      {{ categoria.nombre }}
+    </a>
+  </nav>
+</div>
