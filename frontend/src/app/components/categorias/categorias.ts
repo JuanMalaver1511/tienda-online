@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './categorias.css',
 })
 export class Categorias {
+  @Output() categoriaSeleccionada = new EventEmitter<string>();
+
   categorias = [
     { id: 1, nombre: 'Todos', valor: 'todos' },
     { id: 2, nombre: 'Mujer', valor: 'mujer' },
@@ -21,8 +23,8 @@ export class Categorias {
 
   seleccionarCategoria(categoria: string): void {
     this.categoriaActiva = categoria;
+    this.categoriaSeleccionada.emit(categoria);
     console.log('Categoría seleccionada:', categoria);
-    // Aquí puedes emitir un evento o llamar un servicio para filtrar productos
   }
 
   estaActiva(categoria: string): boolean {

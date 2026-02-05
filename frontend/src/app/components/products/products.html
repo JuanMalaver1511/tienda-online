@@ -1,4 +1,40 @@
-<p>products works!</p>
-<span>
-    hola desde products
-</span>
+<div class="productos-grid">
+  <article class="producto-card" *ngFor="let producto of productosFiltrados">
+    <!-- Imagen del producto -->
+    <div class="producto-imagen">
+      <img [src]="producto.imagen" [alt]="producto.nombre">
+      
+      <!-- Etiqueta NUEVO o SALE -->
+      <span 
+        *ngIf="producto.etiqueta" 
+        class="etiqueta"
+        [class.etiqueta-nuevo]="producto.etiqueta === 'NUEVO'"
+        [class.etiqueta-sale]="producto.etiqueta === 'SALE'">
+        {{ producto.etiqueta }}
+      </span>
+    </div>
+
+    <!-- Información del producto -->
+    <div class="producto-info">
+      <p class="producto-categoria">{{ producto.categoria }}</p>
+      <h3 class="producto-nombre">{{ producto.nombre }}</h3>
+      
+      <!-- Precio -->
+      <div class="producto-precio">
+        <span class="precio-actual">€{{ producto.precio.toFixed(2) }}</span>
+        <span 
+          *ngIf="tieneDescuento(producto)" 
+          class="precio-original">
+          €{{ producto.precioOriginal?.toFixed(2) }}
+        </span>
+      </div>
+
+      <!-- Tallas disponibles -->
+      <div class="producto-tallas">
+        <span *ngFor="let talla of producto.tallas" class="talla">
+          {{ talla }}
+        </span>
+      </div>
+    </div>
+  </article>
+</div>
