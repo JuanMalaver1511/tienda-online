@@ -26,7 +26,7 @@ export class Products {
       nombre: 'Blazer Oversize Lino',
       precio: 189.00,
       categoria: 'Mujer',
-      imagen: '1.jpg',
+      imagen: 'mujer/mujer.png',
       tallas: ['XS', 'S', 'M', 'L', '+1'],
       etiqueta: 'NUEVO'
     },
@@ -36,7 +36,7 @@ export class Products {
       precio: 89.00,
       precioOriginal: 129.00,
       categoria: 'Mujer',
-      imagen: 'assets/pantalon-blanco.jpg',
+      imagen: 'mujer/mujer.png',
       tallas: ['XS', 'S', 'M', 'L'],
       etiqueta: 'SALE'
     },
@@ -62,7 +62,7 @@ export class Products {
       nombre: 'Abrigo Lana',
       precio: 289.00,
       categoria: 'Mujer',
-      imagen: 'assets/abrigo-beige.jpg',
+      imagen: 'mujer/mujer.png',
       tallas: ['XS', 'S', 'M', 'L'],
       etiqueta: 'NUEVO'
     },
@@ -72,7 +72,7 @@ export class Products {
       precio: 95.00,
       precioOriginal: 135.00,
       categoria: 'Hombre',
-      imagen: 'assets/cargo-beige.jpg',
+      imagen: 'hombre/hombre.webp',
       tallas: ['S', 'M', 'L', 'XL'],
       etiqueta: 'SALE'
     }
